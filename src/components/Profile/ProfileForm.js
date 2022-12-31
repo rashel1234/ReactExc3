@@ -18,9 +18,9 @@ const ProfileForm = () => {
     const enteredEmail = emailInputRef.current.value;
 
     
-    let url = 'https://reactexc3-default-rtdb.firebaseio.com/users.json';
+    let url = 'https://reactexc3-default-rtdb.firebaseio.com/';
     
-    fetch (url ,
+    fetch (url + enteredId + '.json',
       {
         method: 'PUT',
         body: JSON.stringify({
