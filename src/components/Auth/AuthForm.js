@@ -27,11 +27,11 @@ let url ;
 
 if ( isLogin){
 
-url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOvCCSMaTTmfb4OXcm6P_LmTe6jb0PaOY';
+url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCGevo_cp7rWRF1Xwig_8YrcyLFbGkz17s';
 
 }else{
 
-  url =  'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCOvCCSMaTTmfb4OXcm6P_LmTe6jb0PaOY' ; 
+  url =  'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCGevo_cp7rWRF1Xwig_8YrcyLFbGkz17s' ; 
  
 }
 fetch (url ,
