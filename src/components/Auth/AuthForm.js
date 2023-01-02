@@ -1,8 +1,10 @@
 import { useState , useRef } from 'react';
+import { useHistory  } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
+  let navigate = useHistory();
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef(); 
@@ -16,51 +18,50 @@ const AuthForm = () => {
 const submitHandler = (event) =>{
   event.preventDefault();
 
-const enteredEmail = emailInputRef.current.value;
-const enteredPassword = passwordInputRef.current.value;
+  const enteredEmail = emailInputRef.current.value;
+  const enteredPassword = passwordInputRef.current.value;
 
-// optional add validation 
+  setIsLoading(true);
 
-setIsLoading(true);
+  let url ; 
 
-let url ; 
+  if ( isLogin){
 
-if ( isLogin){
+  url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCGevo_cp7rWRF1Xwig_8YrcyLFbGkz17s';
 
-url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCGevo_cp7rWRF1Xwig_8YrcyLFbGkz17s';
+  }else{
 
-}else{
-
-  url =  'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCGevo_cp7rWRF1Xwig_8YrcyLFbGkz17s' ; 
- 
-}
-fetch (url ,
-  {
-    method: 'POST',
-    body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        returnSecureToken: true
-    }),
-    headers:{
-      'Content-Type': 'application/json'
-    }
-  }).then ( res => {
-    setIsLoading(false);
-    if(res.ok) {
-     return res.json();
-    }else{
-      return res.json ().then((data) => {
-       let errorMessage = 'Auth failed';
-    
-       throw new Error( errorMessage);
-      });
-    }
-  }).then( (data) => {
-    console.log(data);
-  }).catch (err => {
-    alert (err.message);
-  });
+    url =  'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCGevo_cp7rWRF1Xwig_8YrcyLFbGkz17s' ; 
+  
+  }
+  fetch (url ,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true
+      }),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then ( res => {
+      setIsLoading(false);
+      if(res.ok) {
+      return res.json();
+      }else{
+        return res.json ().then((data) => {
+        let errorMessage = 'Auth failed';
+      
+        throw new Error( errorMessage);
+        });
+      }
+    }).then( (data) => {
+      console.log(data);
+      navigate.push("/profile")
+    }).catch (err => {
+      alert (err.message);
+    });
 }
 
   return (
