@@ -3,7 +3,7 @@ import { useHistory  } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
 
-const AuthForm = () => {
+const AuthForm = ({setIdtoken}) => {
   let navigate = useHistory();
 
   const emailInputRef = useRef();
@@ -57,7 +57,7 @@ const submitHandler = (event) =>{
         });
       }
     }).then( (data) => {
-      console.log(data);
+      setIdtoken(data.idToken)
       navigate.push("/profile")
     }).catch (err => {
       alert (err.message);

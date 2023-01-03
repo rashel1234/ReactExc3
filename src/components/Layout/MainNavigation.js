@@ -11,6 +11,9 @@ const MainNavigation = () => {
       <nav>
         <ul>
           <li>
+            <Link to='/changePassword'>Change Password</Link>
+          </li>
+          <li>
             <Link to='/auth'>Login</Link>
           </li>
           <li>
