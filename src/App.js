@@ -27,9 +27,11 @@ function App() {
         <Route path='/search'>
           <SearchPage />
         </Route>
-        <Route path='/changePassword'>
-          <PasswordPage id={id}/>
-        </Route>
+        {
+          id != '' ? <Route path='/changePassword'>
+            <PasswordPage id={id}/>
+          </Route> : <div><h1>You need to login to change the password</h1></div>
+        }
       </Switch>
     </Layout>
   );
